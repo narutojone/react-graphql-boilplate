@@ -1,0 +1,99 @@
+{
+	"name": "sample-stack-backend-server",
+	"version": "0.0.10",
+	"description": "Starter kit for apollo server using webpack and typescript",
+	"main": "dist/index.js",
+	"private": true,
+	"scripts": {
+		"prepublish": "npm run build:clean",
+		"build:clean": "rimraf dist",
+		"build": "cross-env NODE_ENV=production spin build",
+		"start": "node --harmony dist",
+		"start:staging": "cross-env ENV_FILE=../../config/staging/staging.env node --harmony dist",
+		"watch": "spin watch",
+		"watch:staging": "cross-env NODE_ENV=staging ENV_FILE=../../config/staging/staging.env spin watch",
+		"test": "jest",
+		"test:watch": "npm test -- --watch",
+		"test:notify": "npm run test:watch -- --notify",
+		"docker:build": "npm run build && docker build . -t $npm_package_name:$npm_package_version",
+		"docker:run": "docker run -it $npm_package_name:$npm_package_version",
+		"preupver": "npm test",
+		"upver": "standard-version",
+		"db:migrate": "../../node_modules/.bin/knex migrate:latest --cwd . --knexfile ./knexfile.ts",
+		"db:migrate:rollback": "../../node_modules/.bin/knex migrate:rollback  --cwd . --knexfile ./knexfile.ts",
+		"db:seed": "npm run db:migrate && ../../node_modules/.bin/knex seed:run  --cwd . --knexfile ./knexfile.ts"
+	},
+	"keywords": [
+		"apollo",
+		"backend",
+		"apollo-server",
+		"typescript",
+		"webpack",
+		"graphql",
+		"graphiql",
+		"express"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cdmbase/fullstack-pro.git"
+	},
+	"author": "CDMBase LLC",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/cdmbase/fullstack-pro/issues"
+	},
+	"homepage": "https://github.com/cdmbase/fullstack-pro#readme",
+	"dependencies": {
+		"@sample-stack/graphql-schema": "*",
+		"@sample-stack/server-core": "*",
+		"@sample-stack/core": "*",
+		"@sample-stack/store": "*",
+		"@sample-stack/graphql-gql": "*",
+		"@sample-stack/utils": "*",
+		"@cdm-logger/server": "^3.0.2",
+		"dotenv": "^4.0.0",
+		"apollo-logger": "^0.1.0",
+		"reflect-metadata": "^0.1.10",
+		"lodash": "^4.17.4",
+		"knex": "^0.13.0",
+		"subscriptions-transport-ws": "^0.8.3",
+		"isomorphic-fetch": "^2.2.1",
+		"inversify": "^4.1.0",
+		"morgan": "^1.8.1",
+		"nats": "^0.7.20",
+		"persistgraphql": "^0.3.10",
+		"nats-hemera": "^2.4.1",
+		"graphql": "^0.10.5",
+		"graphql-subscriptions": "^0.5.0",
+		"graphql-tools": "2.5.1",
+		"graphql-nats-subscriptions": "^1.0.8",
+		"sqlite3": "^3.1.8",
+		"ws": "^3.2.0",
+		"graphql-server-express": "^1.1.2",
+		"express": "^4.16.2",
+		"cors": "^2.8.3",
+		"body-parser": "^1.18.2",
+		"apollo-link": "^0.7.0"
+	},
+	"peerDependencies": {
+		"subscriptions-transport-ws": "*",
+		"body-parser": "*",
+		"cors": "*",
+		"knex": "*",
+		"express": "*",
+		"concurrently": "*",
+		"helmet": "*",
+		"morgan": "*"
+	},
+	"devDependencies": {
+		"cross-env": "^5.0.5",
+		"spinjs": "^0.4.26",
+		"jest": "^21.1.0",
+		"rimraf": "^2.6.1",
+		"webpack": "^3.7.1"
+	},
+	"typings": "dist/main.d.ts",
+	"typescript": {
+		"definition": "dist/main.d.ts"
+	}
+}

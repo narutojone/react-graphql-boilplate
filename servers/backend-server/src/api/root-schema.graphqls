@@ -1,0 +1,22 @@
+type Query {
+    dummy: Int
+}
+
+type Mutation {
+    dummy: Int
+}
+
+type Subscription {
+    dummy: Int
+}
+
+interface Node {
+      id: ID!
+}
+
+
+schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+}

@@ -1,0 +1,31 @@
+{
+    "name": "sample-stack-hemera-server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "croos-env ENV_FILE=../../config/development/dev.env nodemon dist/main.js",
+        "docker:build": "npm run build && docker build . -t $npm_package_name:$npm_package_version",
+        "docker:run": "docker run -it $npm_package_name:$npm_package_version",
+        "prebuild": "npm run build:clean",
+        "pretest": "npm run build",
+        "build": "npm run build:clean && npm run build:dist",
+        "build:watch": "npm run build:dist -- --watch",
+        "build:dist": "webpack",
+        "build:clean": "rimraf dist"
+    },
+    "author": "CDMBase LLC",
+    "license": "ISC",
+    "dependencies": {
+        "@sample-stack/hemera-counter": "*"
+    },
+    "devDependencies": {
+        "jest": "^21.1.0",
+        "rimraf": "^2.6.1",
+        "nodemon": "^1.12.1",
+        "webpack": "^3.7.1"
+    },
+    "optionalDependencies": {
+        "nats-hemera": ">1.5.0"
+    }
+}
